@@ -1,0 +1,38 @@
+﻿
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("Restaurant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("About", "About", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Chef"))
+                    {
+                        <li>@Html.ActionLink("All dishes", "Index", "Chef")</li>
+                        <li>@Html.ActionLink("Create dish", "CreateDish", "Chef")</li>
+                    }
+
+                    if (User.IsInRole("KitchenStaff"))
+                    {
+                        <li>@Html.ActionLink("All orders", "AllOrders", "KitchenStaff")</li>
+                        <li>@Html.ActionLink("My orders", "MyOrders", "KitchenStaff")</li>
+                    }
+
+                    if (User.IsInRole("Taxi"))
+                    {
+                        <li>@Html.ActionLink("Orders", "Index", "TaxiStaff")</li>
+                    }
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
+        </div>
+    </div>

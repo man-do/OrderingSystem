@@ -1,0 +1,88 @@
+﻿@model OrderingSystem.WebApp.Models.NewDishViewModel
+
+@{
+    ViewBag.Title = "SaveDish";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>New dish</h2>
+    <div class="">
+        @using (Html.BeginForm("Save", "Chef", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+        {
+            <div class="col-lg-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control long-textbox" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control long-textbox" })
+                    @Html.ValidationMessageFor(m => m.Description)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Price)
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control long-textbox", type = "numbers" })
+                    @Html.ValidationMessageFor(m => m.Price)
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.IsVegetarian) Is vegetarian
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.IsVegan) Is vegan
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.IsPescatarian) Is pescatarian
+                    </label>
+                </div>
+                <div class="checkbox ">
+                    <label>
+                        @Html.CheckBoxFor(m => m.HasPeanuts) Has peanuts
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(m => m.HasSeafood) Has seafood
+                    </label>
+                </div>
+                <input type="file" name="image1" class="form-control file_select_style" />
+            </div>
+
+            <p><b>Ingredients:</b></p>
+            <div class="col-lg-6 igredients_style">
+
+                <ul id="IgredientsList">
+                    @for (int i = 0; i < Model.Igredients.Count; i++)
+                    {
+                        <li class="igredients_checkbox">
+
+                            @Html.EditorFor(m => Model.Igredients[i].IsChecked)
+                            @Html.DisplayFor(m => Model.Igredients[i].Name)
+
+                            @Html.HiddenFor(m => Model.Igredients[i].IgredientId)
+                            @Html.HiddenFor(m => Model.Igredients[i].Name)
+                        </li>
+                    }
+                </ul>
+            </div>
+            @Html.HiddenFor(m => m.DishId)
+            @Html.AntiForgeryToken();
+            <button class="btn btn-primary" type="submit">Save</button>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

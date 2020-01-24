@@ -1,0 +1,92 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea 
+{
+    max-width: 280px;
+}
+
+<<<<<<< HEAD
+
+.div_right
+{
+    float: right;
+}
+
+.div_left 
+{
+    float: left;
+}
+.long-textbox {
+    max-width: 100%;
+    width: 400px;
+}
+
+.igredients_style{
+    overflow: scroll;
+    border: 1px solid #858585;
+    border-radius: 2px;
+    height: 525px;
+}
+
+.igredients_checkbox {
+    list-style-type: none;
+    height: 30px;
+}
+
+.file_select_style{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.field-validation-error {
+    color: red;
+}
+
+.input-validation-error{
+    border: 1px solid #0a0b3d;
+}
+
+.search-textbox{
+    margin-right: 10px;
+}
+
+.form-inline{
+    margin: 5px;
+}
+
+.div-display{
+    display: inline-block;
+}
+
+
+=======
+hr{
+    border-color:gray;
+}
+
+.dish-block-style{
+    background-color:white;
+    border: 2px solid black;
+    border-radius: 7px;
+    padding: 20px;
+}
+>>>>>>> develop

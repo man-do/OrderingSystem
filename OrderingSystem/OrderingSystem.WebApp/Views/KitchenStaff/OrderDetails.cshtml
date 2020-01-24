@@ -1,0 +1,36 @@
+﻿@model OrderingSystem.WebApp.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Order details</h2>
+    @if (Model.Dishes != null)
+    {
+    <table class="table table-bordered table-hover table-striped">
+        <tr class="success">
+            <th>
+                Ordered dish/es
+            </th>
+        </tr>
+        @foreach (var dish in Model.Dishes)
+        {
+            <tr>
+                <td>
+                @dish.Name
+                </td>
+            </tr>
+        }
+    </table>
+    if (!string.IsNullOrEmpty(Model.ExtraSpecs))
+    {
+        <h4>Extra specifications:</h4>
+        <p>@Model.ExtraSpecs</p>
+    }
+    }
+    else
+    {
+        <p>No dishes ordered!</p>
+    }
+@Html.ActionLink("Order prepared", "OrderPrepared", new { id = Model.OrderId}, new { @class = "btn btn-primary"})

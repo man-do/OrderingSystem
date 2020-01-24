@@ -1,0 +1,31 @@
+﻿@model OrderingSystem.WebApp.Models.CheckoutViewModel
+
+@{
+    ViewBag.Title = "CompleteCart";
+}
+
+<h2>Complete Cart</h2>
+
+@using (Html.BeginForm("CompleteCart", "Checkout", FormMethod.Post, new { @class = "form-group" }))
+{
+    <hr />
+    <h3>Enter new address</h3>
+    @Html.TextBoxFor(x => x.NewAddress, new { @class = "form-control" })
+    <hr />
+    <h3>Or use old one</h3>
+    @Html.DropDownListFor(x => x.Address
+    , Model.GetAddressesForDropDown(Model.AllUserAddresses)
+    ,"Select one address"
+    , new { @class = "form-control" })
+
+    <hr />
+    <h3>If you need to tell us something</h3>
+    @Html.TextAreaFor(x => x.ExtraSpecifications, new { @class = "form-control rounded-0"})
+
+    <input type="submit" 
+           value="Place Order"
+           class="btn btn-info" 
+           style="font-size:30px; bottom:30px; right:5%; position:fixed;z-index :1; "
+           />
+}
+

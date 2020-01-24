@@ -1,0 +1,73 @@
+﻿@model IEnumerable<OrderingSystem.Data.Data.Entities.Dish>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Dishes list</h2>
+
+<div>
+    
+    @using (Html.BeginForm("Index", "Chef", FormMethod.Get))
+    {
+        <div class="form-inline">
+            <div class="div-display">
+                @Html.TextBox("searching", null, new { @class = "form-control search-textbox", autocomplete = "off" })
+                @*<input type="submit" class="btn btn-default" value="Search" />*@
+                <a href="@Url.Action("CreateDish", "Chef")" class="btn-primary form-control">Create dish</a>
+            </div>
+            <div class="div-display div_right">
+                @{ IEnumerable<string> vs = new List<string> { "Vegetarian", "Vegan", "Pescatarian", "Has peanut", "Has seafood" };}
+                @*@Html.Label("Filter: ")*@
+                @Html.DropDownList("Dishes", new SelectList(vs), "Filter", new { @class = "form-control", onchange = "FilterChange()" })
+            </div>
+        </div>
+    }
+</div>
+<div id="target">
+</div>
+<div id="log">
+</div>
+
+
+@*J-quarry script*@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(
+        
+            () => {
+                $("#log").ajaxError(function (event, jqxhr, settings, exception)
+                {
+                    alert(exception);
+                });
+
+                var selectedFilter = $("select option:selected").first().text();
+                $.get('@Url.Action("DishesByFilterPartial")', { id: selectedFilter }, function (data)
+                    {
+                        $("#target").html(data);
+                    });
+                }
+    );
+
+    function FilterChange()
+    {
+        $("#log").ajaxError(function (event, jqxhr, settings, exception) {
+            alert(exception);
+        });
+
+        var selectedFilter = $("select option:selected").first().text();
+        $.get('@Url.Action("DishesByFilterPartial")', { id: selectedFilter }, function (data) {
+            $("#target").html(data);
+        });
+    }
+
+    $("#searching").on("change paste keyup", function () {
+        let searchWord = $("#searching").val();
+        let selectedFilter = $("select option:selected").first().text();
+        $.get('@Url.Action("DishesByFilterPartial")', { id: selectedFilter, search: searchWord}, function (data) {
+            $("#target").html(data);
+        });
+    });
+</script>
+

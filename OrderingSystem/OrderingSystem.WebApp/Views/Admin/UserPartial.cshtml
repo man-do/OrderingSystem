@@ -1,0 +1,29 @@
+﻿@model IEnumerable<OrderingSystem.Data.Data.Models.UserViewModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-warning" })
+
+            @if (item.Disabled == false)
+            {
+                @Html.ActionLink("Disable", "Disable", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
+            else
+            {
+                @Html.ActionLink("Enable", "Enable", new { id = item.Id }, new { @class = "btn btn-primary" })
+            }
+        </td>
+    </tr>
+}
+

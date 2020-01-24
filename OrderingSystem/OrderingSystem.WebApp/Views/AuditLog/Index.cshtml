@@ -1,0 +1,37 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model PagedList<OrderingSystem.Data.Data.Models.AuditLogViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Level)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Message)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Level)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+        </tr>
+    }
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

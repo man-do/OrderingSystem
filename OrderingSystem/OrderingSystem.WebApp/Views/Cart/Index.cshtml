@@ -1,0 +1,54 @@
+﻿@using OrderingSystem.WebApp.Models
+
+@model OrderingSystem.WebApp.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!--List items on current cart-->
+<h1>Lista e blerjeve</h1>
+
+@foreach (var item in Model.Cart.Lines)
+{
+    <hr />
+    <div class="cardStyle">
+        <h2>Emri: @item.Dish.Name</h2>
+        <h2>Sasia : @item.Quantity.ToString()</h2>
+        <h2>Cmimi : @($"{(item.Quantity * item.Dish.Price).ToString("#.##")} LEK")</h2>
+        @using (Html.BeginForm("RemoveFromCart", "Cart", new { dishIdParam = item.Dish.DishId }, FormMethod.Post ))
+        {
+            @Html.Hidden("dishIdParam", item.Dish.DishId);
+
+            <button type="submit" class="btn btn-danger">Remove from cart!</button>
+        }
+    </div>
+}
+
+
+
+<!--Products summary-->
+<hr />
+<h3>Numri i produkteve : @Model.Cart.TotalProducts()</h3>
+<h3>Cmimi total : @($"{Model.Cart.TotalPrice().ToString("#.##")} LEK")</h3>
+
+
+<div style="display:inline-flex; z-index: 0; right:5%; bottom:5%; position:fixed;">
+    <!--Continue Shopping button-->
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        <button type="submit" class="btn btn-success" style="margin-right:10px;">
+            <h4>Continue Shopping</h4>
+        </button>
+    }
+    <!--Checkout-->
+    @if (Model.Cart.TotalProducts() > 0)
+    {
+        using (Html.BeginForm("CompleteCart", "Checkout", FormMethod.Get))
+        {
+            <button type="submit" class="btn btn-info">
+                <h4>Checkout</h4>
+            </button>
+            }
+        }
+</div>

@@ -1,0 +1,106 @@
+﻿@using System.Collections.Generic
+@using OrderingSystem.Data.Data.Entities
+@using OrderingSystem.WebApp.Models
+@model ListDishesViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@*Filters*@
+@Html.Action("Filter")
+@*Listing of dishes*@
+<div class="container-fluid">
+    @if (Model == null || Model.Dishes.Count() == 0)
+    {
+        <h2>No results.</h2>
+    }
+    else
+    {
+        foreach (Dish dish in Model.Dishes)
+        {
+            <hr />
+            <div class="card mb-3 cardStyle row ">
+                <div class="card-body col-md-6 offset-md-3">
+                    <h2 class="card-title">@dish.Name</h2>
+                    <p class="card-text">@dish.Description</p>
+                    <p class="card-text">Price: @($"{dish.Price.ToString("#.##")} LEK")</p>
+                    <p class="card-text">Rating: @dish.Rating</p>
+                    <p class="card-text">
+                        @Html.ActionLink("Add to cart" , "AddToCart" , "Cart" , new { dishIdParam = dish.DishId
+                       , returnUrl = Request.Url.PathAndQuery }
+                   , new { @class = "btn btn-success" })
+                    </p>
+                </div>
+                @{
+                    if (dish.Image != null)
+                    {
+                        string imageString = Convert.ToBase64String(dish.Image);
+                        var imgSrc = String.Format("data:image/png;base64,{0}", imageString);
+                        <div class="col-md-3">
+                            <img class="card-img-top" src="@imgSrc" alt="Dish image" width="300" height="auto">
+                        </div>
+                    }
+                }
+            </div>
+        }
+    }
+</div>
+@*Pagination*@
+<hr />
+<nav aria-label="Page navigation example">
+    <ul class="pagination pg-blue">
+        @if (Model.PagingInfo.CurrentPage > 0)
+        {
+            <li class="page-item ">
+                @Html.RouteLink("Previous", "HomePaging"
+               ,new {searchPhrase = Request.QueryString["searchPhrase"]
+               ,
+               dishType = Request.QueryString["dishType"]
+               ,
+               allergy = Request.QueryString["allergy"]
+               ,
+               rating = Convert.ToInt32(Request.QueryString["rating"])
+               ,
+               igredientId = Convert.ToInt32(Request.QueryString["igredientId"])
+               ,
+               page = Model.PagingInfo.CurrentPage - 1 }
+               , new { @class = "page-link" })
+            </li>
+
+
+        }
+        <li class="page-item active">
+            <a class="page-link">@Model.PagingInfo.CurrentPage</a>
+        </li>
+        @if (Model.PagingInfo.CurrentPage < Model.PagingInfo.TotalPages)
+        {
+            <li class="page-item ">
+                @Html.RouteLink("Next","HomePaging" , new {
+               searchPhrase = Request.QueryString["searchPhrase"]
+               ,
+               dishType = Request.QueryString["dishType"]
+               ,
+               allergy = Request.QueryString["allergy"]
+               ,
+               rating = Convert.ToInt32(Request.QueryString["rating"])
+               ,
+               igredientId = Request.QueryString["igredientId"] == null ? -1: Convert.ToInt32(Request.QueryString["igredientId"])
+               ,
+               page = Model.PagingInfo.CurrentPage + 1}
+           , new {@class = "page-link" })
+            </li>
+        }
+    </ul>
+</nav>
+@*Go to cart button*@
+@using (Html.BeginForm("Index", "Cart", FormMethod.Get))
+{
+    @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+    <button class="btn btn-success" style="z-index : 1 ;position:fixed ;right : 50px ; bottom : 30px;" value="Cart">
+        <h4>Go To Cart!</h4>
+    </button>
+}
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

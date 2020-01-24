@@ -1,0 +1,36 @@
+﻿@model IEnumerable<OrderingSystem.Data.Data.Entities.Dish>
+
+    @if (Model != null)
+    {
+    <table class="table table-striped">
+    <tr class="success">
+        <th>Dish</th>
+        <th></th>
+        <th></th>
+    </tr>
+        @foreach (var dish in Model)
+        {
+            <tr>
+                <td>
+                    @dish.Name
+                </td>
+
+                <td width="5%">
+                    @if (dish.Enabled == true)
+                    {
+                        @Html.ActionLink("Disable", "EnableDisableDish", "Chef", new { id = dish.DishId }, null)
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Enable", "EnableDisableDish", "Chef", new { id = dish.DishId }, null)
+                    }
+                </td>
+                <td width="5%">@Html.ActionLink("Edit", "Edit", "Chef", new { id = dish.DishId }, null)</td>
+            </tr>
+        }
+    </table>
+    }
+    else
+    {
+        <p>There are no dishes</p>
+    }

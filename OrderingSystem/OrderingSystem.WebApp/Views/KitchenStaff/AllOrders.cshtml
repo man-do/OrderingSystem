@@ -1,0 +1,56 @@
+﻿@model OrderingSystem.WebApp.Models.AllOrdersViewModel
+@{
+    ViewBag.Title = "AllOrders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Orders</h2>
+
+@if (Model == null || Model.OrdersModels.Count == 0)
+{
+    <h2>No results.</h2>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <tr class="success">
+            <th>Id</th>
+            <th>Date</th>
+            <th>Delivery address</th>
+            <th>Price</th>
+        </tr>
+
+        @foreach (var item in Model.OrdersModels)
+        {
+            <tr>
+                <td>@item.OrderId</td>
+                <td>@item.OrderTime</td>
+                <td>@item.DeliveryAddress</td>
+                <td>@item.OrderPrice</td>
+            </tr>
+        }
+    </table>
+    <nav aria-label="Page navigation example">
+        <div>
+            @if (Model.PagingInfo.CurrentPage >= 0)
+            {
+                <li class="page-item ">
+                    <ul class="pagination">
+                        <li><a href="@Url.Action("AllOrders", "KitchenStaff", new { page = (Model.PagingInfo.CurrentPage - 1)})">&laquo;</a></li>
+                        @for (int i = 0; i <= Model.PagingInfo.TotalPages; i++)
+                        {
+                            if (i == Model.PagingInfo.CurrentPage)
+                            {
+                                <li class="active"><a href="@Url.Action("AllOrders", "KitchenStaff", new { page = i})">@(i)</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@Url.Action("AllOrders", "KitchenStaff", new { page = i})">@(i)</a></li>
+                            }
+                        }
+                        <li><a href="@Url.Action("AllOrders", "KitchenStaff", new { page = (Model.PagingInfo.CurrentPage + 1)})">&raquo;</a></li>
+                    </ul>
+                </li>
+            }
+        </div>
+    </nav>
+}

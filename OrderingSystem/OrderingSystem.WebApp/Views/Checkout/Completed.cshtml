@@ -1,0 +1,30 @@
+﻿@model OrderingSystem.Data.Data.Entities.Order
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Completed";
+}
+
+
+@if (Model != null)
+{
+    <h2>Completed</h2>
+
+    <h2>From the moment you placed the order you still have 5 minutes to cancel the order!</h2>
+    <h2>If you leave from this page you can't cancel the current order.</h2>
+
+    if (DateTime.Now - Model.OrderTime <= TimeSpan.FromMinutes(5))
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ActionLink("Cancel Order", "CancelOrder"
+           , new { orderToCancelId = Model.OrderId }
+           , new { @class = "btn btn-danger btn-lg"})
+        }
+    }
+}
+else
+{
+    <h2>Please make an order!</h2>
+}

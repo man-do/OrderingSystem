@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{95B84984-274E-44A2-9508-F2BC7D5E8E0F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OrderingSystem.Data</RootNamespace>
+    <AssemblyName>OrderingSystem.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Business\AssignHelper.cs" />
+    <Compile Include="Common\PagingInfo.cs" />
+    <Compile Include="Business\Abstract\IAuditLogService.cs" />
+    <Compile Include="Business\Abstract\IUserService.cs" />
+    <Compile Include="Business\Concrete\AuditLogService.cs" />
+    <Compile Include="Business\Concrete\UserService.cs" />
+    <Compile Include="Data\Abstract\IRepository.cs" />
+    <Compile Include="Data\Concrete\DbRepository.cs" />
+    <Compile Include="Data\Entities\Address.cs" />
+    <Compile Include="Data\Entities\AspNetRole.cs" />
+    <Compile Include="Data\Entities\AspNetUser.cs" />
+    <Compile Include="Data\Entities\AspNetUserClaim.cs" />
+    <Compile Include="Data\Entities\AspNetUserLogin.cs" />
+    <Compile Include="Data\Entities\C__MigrationHistory.cs" />
+    <Compile Include="Data\Entities\Dish.cs" />
+    <Compile Include="Data\Entities\Igredient.cs" />
+    <Compile Include="Data\Entities\AuditLog.cs" />
+    <Compile Include="Data\Entities\Order.cs" />
+    <Compile Include="Data\Entities\OSEntities.cs" />
+    <Compile Include="Data\Entities\Staff_Capacity.cs" />
+    <Compile Include="Data\Models\AuditLogViewModel.cs" />
+    <Compile Include="Data\Models\RoleViewModel.cs" />
+    <Compile Include="Data\Models\UserViewModel.cs" />
+    <Compile Include="Migrations\201902102233203_InitialMigration.cs" />
+    <Compile Include="Migrations\201902102233203_InitialMigration.Designer.cs">
+      <DependentUpon>201902102233203_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902102236391_AddRoles.cs" />
+    <Compile Include="Migrations\201902102236391_AddRoles.Designer.cs">
+      <DependentUpon>201902102236391_AddRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902102242247_AssignTestUsersToTheirRoles.cs" />
+    <Compile Include="Migrations\201902102242247_AssignTestUsersToTheirRoles.Designer.cs">
+      <DependentUpon>201902102242247_AssignTestUsersToTheirRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902102246228_AssignOtherTestUsersToTheirRoles.cs" />
+    <Compile Include="Migrations\201902102246228_AssignOtherTestUsersToTheirRoles.Designer.cs">
+      <DependentUpon>201902102246228_AssignOtherTestUsersToTheirRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902242122003_AddTest.cs" />
+    <Compile Include="Migrations\201902242122003_AddTest.Designer.cs">
+      <DependentUpon>201902242122003_AddTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902261910512_AddedIsActiveAndExtraspecs.cs" />
+    <Compile Include="Migrations\201902261910512_AddedIsActiveAndExtraspecs.Designer.cs">
+      <DependentUpon>201902261910512_AddedIsActiveAndExtraspecs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902281545171_AddedTaxidriverIdToOrdersTable.cs" />
+    <Compile Include="Migrations\201902281545171_AddedTaxidriverIdToOrdersTable.Designer.cs">
+      <DependentUpon>201902281545171_AddedTaxidriverIdToOrdersTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903092013133_AddAuditlog.cs" />
+    <Compile Include="Migrations\201903092013133_AddAuditlog.Designer.cs">
+      <DependentUpon>201903092013133_AddAuditlog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903181631413_AMigration.cs" />
+    <Compile Include="Migrations\201903181631413_AMigration.Designer.cs">
+      <DependentUpon>201903181631413_AMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="bin\Debug\OrderingSystem.Data.dll.config" />
+    <None Include="Content\bootstrap-grid.css.map" />
+    <None Include="Content\bootstrap-grid.min.css.map" />
+    <None Include="Content\bootstrap-reboot.css.map" />
+    <None Include="Content\bootstrap-reboot.min.css.map" />
+    <None Include="Content\bootstrap.css.map" />
+    <None Include="Content\bootstrap.min.css.map" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\OrderingSystem.Data.csproj.CopyComplete" />
+    <None Include="obj\Debug\OrderingSystem.Data.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\OrderingSystem.Data.csproj.GenerateResource.cache" />
+    <None Include="obj\Debug\OrderingSystem.Data.csprojAssemblyReference.cache" />
+    <None Include="obj\Release\OrderingSystem.Data.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Release\OrderingSystem.Data.csprojAssemblyReference.cache" />
+    <None Include="packages.config" />
+    <None Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\bootstrap.bundle.min.js.map" />
+    <None Include="Scripts\bootstrap.js.map" />
+    <None Include="Scripts\bootstrap.min.js.map" />
+    <None Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Scripts\esm\popper-utils.min.js.map" />
+    <None Include="Scripts\esm\popper.js.map" />
+    <None Include="Scripts\esm\popper.min.js.map" />
+    <None Include="Scripts\jquery-3.3.1.min.map" />
+    <None Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <None Include="Scripts\popper-utils.js.map" />
+    <None Include="Scripts\popper-utils.min.js.map" />
+    <None Include="Scripts\popper.js.map" />
+    <None Include="Scripts\popper.min.js.map" />
+    <None Include="Scripts\README.md" />
+    <None Include="Scripts\umd\popper-utils.js.map" />
+    <None Include="Scripts\umd\popper-utils.min.js.map" />
+    <None Include="Scripts\umd\popper.js.map" />
+    <None Include="Scripts\umd\popper.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201902102233203_InitialMigration.resx">
+      <DependentUpon>201902102233203_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902102236391_AddRoles.resx">
+      <DependentUpon>201902102236391_AddRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902102242247_AssignTestUsersToTheirRoles.resx">
+      <DependentUpon>201902102242247_AssignTestUsersToTheirRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902102246228_AssignOtherTestUsersToTheirRoles.resx">
+      <DependentUpon>201902102246228_AssignOtherTestUsersToTheirRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903092013133_AddAuditlog.resx">
+      <DependentUpon>201903092013133_AddAuditlog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903181631413_AMigration.resx">
+      <DependentUpon>201903181631413_AMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\Debug\OrderingSystem.Data.Migrations.AddRoles.resources" />
+    <EmbeddedResource Include="obj\Debug\OrderingSystem.Data.Migrations.AssignOtherTestUsersToTheirRoles.resources" />
+    <EmbeddedResource Include="obj\Debug\OrderingSystem.Data.Migrations.AssignTestUsersToTheirRoles.resources" />
+    <EmbeddedResource Include="obj\Debug\OrderingSystem.Data.Migrations.InitialMigration.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\Ninject.dll" />
+    <Content Include="bin\Debug\Ninject.xml" />
+    <Content Include="bin\Debug\OrderingSystem.Data.dll" />
+    <Content Include="bin\Debug\OrderingSystem.Data.pdb" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="obj\Debug\OrderingSystem.Data.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\Debug\OrderingSystem.Data.dll" />
+    <Content Include="obj\Debug\OrderingSystem.Data.pdb" />
+    <Content Include="Scripts\admin.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\JavaScript1.js" />
+    <Content Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+    <EmbeddedResource Include="Migrations\201902242122003_AddTest.resx">
+      <DependentUpon>201902242122003_AddTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902261910512_AddedIsActiveAndExtraspecs.resx">
+      <DependentUpon>201902261910512_AddedIsActiveAndExtraspecs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902281545171_AddedTaxidriverIdToOrdersTable.resx">
+      <DependentUpon>201902281545171_AddedTaxidriverIdToOrdersTable.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

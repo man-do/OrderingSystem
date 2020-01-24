@@ -1,0 +1,35 @@
+﻿@model List<OrderingSystem.WebApp.Models.OrderViewModel>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-condensed table-hover">
+        <tr class="success">
+            <th>Orders</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        string orderDishes = "";
+                        var lastDish = item.Dishes.Last();
+                        foreach (var dish in item.Dishes)
+                        {
+                            orderDishes = orderDishes + dish.Name;
+                            if (!dish.Equals(lastDish))
+                            {
+                                orderDishes = orderDishes + ",";
+                            }
+                        }
+                    }
+                    @Html.ActionLink(orderDishes, "OrderDetails", new { id = item.OrderId }, new { @class = "form-control" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>There are no orders</p>
+}

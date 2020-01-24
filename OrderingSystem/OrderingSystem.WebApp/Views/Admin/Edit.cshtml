@@ -1,0 +1,32 @@
+﻿@model OrderingSystem.Data.Data.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>@ViewBag.Title.</h2>
+@Html.AntiForgeryToken()
+<h4>Edit Email</h4>
+<hr />
+@Html.ValidationSummary()
+@using (Html.BeginForm("Edit", "Admin", FormMethod.Post, new { @class = "form-group" }))
+{
+    @Html.HiddenFor(m => m.Id);
+    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+    </div>
+    @Html.LabelFor(m => m.Role.Name, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(m => m.Role.Name, new { @class = "form-control", @disabled = "disabled" })
+    </div>
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" class="btn btn-default" value="Edit User" />
+    </div>
+}
+   

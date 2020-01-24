@@ -1,0 +1,72 @@
+﻿@using OrderingSystem.Data.Data.Entities
+@using System.Collections.Generic
+
+@model IEnumerable<Igredient>
+
+@{
+    ViewBag.Title = "Filter";
+}
+
+
+<div class="jumbotron " colspan="6">
+
+    <!--Search Box-->
+    <div class="row">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+        {
+            <input name="searchPhrase" type="text" class="form-control col-md-4" placeholder="Search..." />
+        }
+        <!--DishType Dropdown-->
+        <div class="dropdown col-md-2">
+            <button class="btn btn-primary btn-block dropdown-toggle" aria-haspopup="true" type="button" data-toggle="dropdown">
+                Types
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Pescatarian", "Index", new { dishType = "Pescatarian" })</li>
+                <li>@Html.ActionLink("Vegan", "Index", new { dishType = "Vegan" })</li>
+                <li>@Html.ActionLink("Vegetarian", "Index", new { dishType = "Vegetarian" })</li>
+                <li>@Html.ActionLink("Seafood", "Index", new { dishType = "Seafood" })</li>
+            </ul>
+        </div>
+        <!--Ingredients Dropdown-->
+        <div class="dropdown col-md-2">
+            <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
+                Ingredients
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                @foreach (Igredient igredient in Model)
+                {
+                    <li>@Html.ActionLink($"{igredient.Name}", "Index", new { igredientId = igredient.IngredientIDd })</li>
+                }
+            </ul>
+        </div>
+        <!--Allergies Dropdown-->
+        <div class="dropdown col-md-2">
+            <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
+                Allergies
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Doesn't have peanuts", "Index", new { allergy = "Peanuts" })</li>
+                <li>@Html.ActionLink("Doesn't have seafood", "Index", new { allergy = "Seafood" })</li>
+            </ul>
+        </div>
+        <!--Rating Dropdown-->
+        <div class="dropdown col-md-2">
+            <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-toggle="dropdown">
+                Rating
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink(">1", "Index", new { rating = (decimal)1 })</li>
+                <li>@Html.ActionLink(">2", "Index", new { rating = (decimal)2 })</li>
+                <li>@Html.ActionLink(">3", "Index", new { rating = (decimal)3 })</li>
+                <li>@Html.ActionLink(">4", "Index", new { rating = (decimal)4 })</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,40 @@
+﻿@model OrderingSystem.WebApp.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "OrderGet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Order details</h2>
+
+<div>
+    <ul class="list-group">
+        <li class="list-group-item"><label>Client username: </label> @Model.clientUserName</li>
+        <li class="list-group-item"><label>Address: </label> @Model.DeliveryAddress</li>
+        <li class="list-group-item"><label>Price: </label> @Model.OrderPrice Leke</li>
+        <li class="list-group-item"><label>Order time: </label> @Model.OrderTime</li>
+    </ul>
+</div>
+<div>
+    <table class="table table-bordered table-striped">
+        <tr class="success">
+            <th>Dishes</th>
+        </tr>
+        @foreach (var dish in Model.Dishes)
+        {
+            <tr>
+                <th>@dish.Name</th>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    @if (Model.TaxiDriverId == null)
+    {
+        <a href="@Url.Action("OrderAccepted", "TaxiStaff", new { id = Model.OrderId})" class="btn-primary form-control" style="width:120px">Accept order</a>
+    }
+    else
+    {
+        <a href="@Url.Action("OrderDelivered", "TaxiStaff", new { id = Model.OrderId})" class="btn-primary form-control" style="width:150px">Order deliverd</a>
+    }
+</div>
